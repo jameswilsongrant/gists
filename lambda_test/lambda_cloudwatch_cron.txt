@@ -1,0 +1,7 @@
+The cloudwatch cron expression is some scuffed version of cron. It requires 6 fields and the day of the week field is a ? for every one.
+
+Once a minute looks like this:
+cron(* * * * ? *)
+
+Documentation is here:
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html

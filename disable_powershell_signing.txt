@@ -1,0 +1,24 @@
+# powershell -ExecutionPolicy ByPass -File script.ps1
+# powershell Set-ExecutionPolicy RemoteSigned
+
+# From stackoverflow
+To check your current execution policy, you can run Get-ExecutionPolicy. But you're probably here because you want to change it.
+
+To do so you'll run the Set-ExecutionPolicy cmdlet.
+
+You'll have two major decisions to make when updating the execution policy.
+
+Execution Policy Type:
+Restricted† - No Script either local, remote or downloaded can be executed on the system.
+AllSigned - All script that are ran require to be digitally signed.
+RemoteSigned - All remote scripts (UNC) or downloaded need to be signed.
+Unrestricted - No signature for any type of script is required.
+Scope of new Change
+LocalMachine† - The execution policy affects all users of the computer.
+CurrentUser - The execution policy affects only the current user.
+Process - The execution policy affects only the current Windows PowerShell process.
+† = Default
+
+For example: if you wanted to change the policy to RemoteSigned for just the CurrentUser, you'd run the following command:
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser

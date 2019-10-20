@@ -1,0 +1,10 @@
+#!/bin/bash
+# pre-commit hook to check for a bad string (ex an api key, account number, password, etc)
+STRING=BADSTRING
+COUNT=$(find . -type f -not -path "./.git/*" -exec grep ${STRING} {} \; | wc -l)
+if [ $COUNT == 0 ]; then
+  exit 0
+else 
+  echo "Found ${COUNT} instances of ${STRING}. Failing pre-commit hook."
+  exit 1
+fi

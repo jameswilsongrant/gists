@@ -1,0 +1,23 @@
+{
+  "Version": "2001-01-01",
+  "Id": "SNSTOPICPolicy",
+  "Statement": [
+    {
+      "Sid": "SNSTOPICSID",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "SNS:Publish",
+      "Resource": "arn:aws:sns:REGION:ACCOUNTID:SNSTOPIC",
+      "Condition": {
+        "ArnLike": {
+          "aws:SourceArn": [
+            "arn:aws:s3:::BUCKETNAME1", # Putting a region/account ID in the arn doesn't seem to work correctly
+            "arn:aws:s3:::BUCKETNAME2"
+          ]
+        }
+      }
+    }
+  ]
+}

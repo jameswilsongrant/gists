@@ -1,0 +1,10 @@
+This is a list of data brokers that was assembled by Vermont. This was due to a change in law.
+
+YCombinator Story
+https://news.ycombinator.com/item?id=19289848
+
+FastCompany Story
+https://www.fastcompany.com/90302036/over-120-data-brokers-inch-out-of-the-shadows-under-landmark-vermont-law
+
+Original Data Source (janky, I used Lexis Nexis since they're a huge name)
+https://www.vtsosonline.com/online/BusinessInquire/BusinessInformation?businessID=353281

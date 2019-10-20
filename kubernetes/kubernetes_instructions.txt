@@ -1,0 +1,55 @@
+Run the following. You will be asked for your root during the virtualbox installation. minkube start will take some time to complete. This installs virtualbox, the tools you'll need, and sets up the kubernetes environment.
+
+brew cask install virtualbox
+brew install docker
+brew cask install minikube
+minikube start
+
+Create the file below.
+
+metallb.yml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 192.168.99.200-192.168.99.250
+
+Run the following. This will setup MetalLB to allow Load Balancer services. It will also setup the configuration you need to make docker/kubectl work from the command line.
+
+kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.6.2/manifests/metallb.yaml (kubectl apply -f metallb-manifest.yaml)
+kubectl create -f metallb.yml (kubectl apply -f metallb-config.yaml)
+echo "eval $(minikube docker-env)" >> ~/.bash_profile
+
+Restart your terminal (to load the docker environment variables). 
+* Note that on reboot you may have to hit ctrl-c when opening a terminal until you run 'minikube start.' 
+Loading the ENV variables from 'minikube docker-env' actually talks to the virtual machine (so it hangs if that isn't up yet) *
+
+To test that everything is working, run the following:
+
+kubectl run nginx --image=nginx --port=80
+kubectl expose deployment nginx --type=LoadBalancer --name=nginx-service
+kubectl get pods --watch
+
+Wait for the pods to show as Running. Once you see that you can Ctrl C out.
+
+kubectl get services
+
+Note the EXTERNAL-IP for nginx service. Put the external IP in your browser and you should get an nginx page.
+To clean this up, run the following:
+
+kubectl delete service nginx-service
+kubectl delete deployment nginx
+
+Every time you reboot you will need to do the following to start the cluster back up:
+
+minikube start
+* Starting the virtual machine manually through VirtualBox will not work properly. *
+

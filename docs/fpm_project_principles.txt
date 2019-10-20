@@ -1,0 +1,3 @@
+Community: If a newbie has a bad time, it's a bug.
+Engineering: Make it work, then make it right, then make it fast.
+Capabilities: If it doesn't do a thing today, we can make it do it tomorrow.

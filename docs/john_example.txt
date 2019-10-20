@@ -1,0 +1,13 @@
+ubuntu@docker:~/john$ mkpasswd -m sha-512 donald > test.crypt
+ubuntu@docker:~/john$ john --wordlist=./fast_list.txt test.crypt
+Loaded 1 password hash (crypt, generic crypt(3) [?/64])
+Press 'q' or Ctrl-C to abort, almost any other key for status
+donald           (?)
+1g 0:00:00:00 100% 1.515g/s 143.9p/s 143.9c/s 143.9C/s !@#$%^&*..zxcvbnm
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed
+ubuntu@docker:~/john$ john --show test.crypt
+?:donald
+
+1 password hash cracked, 0 left
+ubuntu@docker:~/john$

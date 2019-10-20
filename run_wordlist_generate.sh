@@ -1,0 +1,2 @@
+#!/bin/bash -x
+for x in $(cat input.txt); do echo ${x}; done | pv -trb | sed -e '/http\:\/\//d' | sed -e '/https\:\/\//d' | grep "^[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]" | grep "[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]$" | sort | uniq > output.txt

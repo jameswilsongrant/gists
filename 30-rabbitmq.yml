@@ -1,0 +1,38 @@
+---
+- hosts: rabbitmq
+  gather_facts: no
+  become: yes
+
+  tasks:
+  - name: Install rabbitmq-server
+    package:
+      name: rabbitmq-server
+      state: present
+  
+  - name: Install pwgen
+    package:
+      name: pwgen
+      state: present
+
+  - name: Install rabbitmq management plugin
+    shell: rabbitmq-plugins enable rabbitmq_management > /etc/.rabbitmq_management
+    args:
+      creates: /etc/.rabbitmq_management
+
+  - name: Set initial password
+    shell: |
+      PASS=$(pwgen 20 -c 1)
+      rabbitmqctl add_user rabbitrun ${PASS}
+      echo -n ${PASS}
+      touch /etc/.rabbitmq_user
+    register: pass
+    args:
+      creates: /etc/.rabbitmq_user
+
+  # This echoes the password out to the user if the previous directive runs
+  - debug: var=pass.stdout_lines
+
+  - name: Set permissions
+    shell: rabbitmqctl set_user_tags rabbitrun administrator > /etc/.rabbitmq_perms
+    args:
+      creates: /etc/.rabbitmq_perms

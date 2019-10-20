@@ -1,0 +1,14 @@
+Command	Description
+Vssadmin add shadowstorage	Adds a volume shadow copy storage association.
+Vssadmin create shadow	Creates a new volume shadow copy.
+Vssadmin delete shadows	Deletes volume shadow copies.
+Vssadmin delete shadowstorage	Deletes volume shadow copy storage associations.
+Vssadmin list providers	Lists registered volume shadow copy providers.
+Vssadmin list shadows	Lists existing volume shadow copies.
+Vssadmin list shadowstorage	Lists all shadow copy storage associations on the system.
+Vssadmin list volumes	Lists volumes that are eligible for shadow copies.
+Vssadmin list writers	Lists all subscribed volume shadow copy writers on the system.
+Vssadmin resize shadowstorage	Resizes the maximum size for a shadow copy storage association.
+
+systemroot\NTDS\ntds.dit
+edb.log

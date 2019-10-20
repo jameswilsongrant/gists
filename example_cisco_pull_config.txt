@@ -1,0 +1,3 @@
+set terminal length 0
+enable
+show running-config view full
