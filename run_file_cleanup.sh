@@ -9,6 +9,7 @@ mv *.png ~/Downloads/images/
 mv *.jpg ~/Downloads/images/
 mv *.jpeg ~/Downloads/images/
 mv *.gif ~/Downloads/images/
+mv *.webp ~/Downloads/images/
 
 mv *.PNG ~/Downloads/images/
 mv *.JPG ~/Downloads/images/
@@ -22,6 +23,7 @@ mv *.flv ~/Downloads/video/
 mv *.mp4 ~/Downloads/video/
 mv *.mov ~/Downloads/video/
 mv *.mkv ~/Downloads/video/
+mv *.opus ~/Downloads/video/
 
 mv *.WEBM ~/Downloads/video/
 mv *.MPG ~/Downloads/video/
@@ -38,6 +40,7 @@ mv *.rar ~/Downloads/zip/
 mv *.tgz ~/Downloads/zip/
 mv *.tar ~/Downloads/zip/
 mv *.tar.gz ~/Downloads/zip/
+mv *.tar.xz ~/Downloads/zip/
 mv *.7z ~/Downloads/zip/
 
 mv *.pdf ~/Downloads/pdf/
