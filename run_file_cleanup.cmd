@@ -31,6 +31,7 @@ move *.FLV "%HOMEDRIVE%%HOMEPATH%"/Downloads/video/
 move *.MP4 "%HOMEDRIVE%%HOMEPATH%"/Downloads/video/
 move *.MOV "%HOMEDRIVE%%HOMEPATH%"/Downloads/video/
 move *.MKV "%HOMEDRIVE%%HOMEPATH%"/Downloads/video/
+move *.mp3 "%HOMEDRIVE%%HOMEPATH%"/Downloads/video/
 
 move *.iso "%HOMEDRIVE%%HOMEPATH%"/Downloads/zip/
 move *.dmg "%HOMEDRIVE%%HOMEPATH%"/Downloads/zip/
