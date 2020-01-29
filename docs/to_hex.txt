@@ -1,0 +1,11 @@
+python3
+>>> "Two cows collide. An udder disaster!".encode('utf-8').hex()
+'54776f20636f777320636f6c6c6964652e20416e20756464657220646973617374657221'
+
+node12
+> new Buffer.from("Two cows collide. An udder disaster!").toString("hex");
+'54776f20636f777320636f6c6c6964652e20416e20756464657220646973617374657221'
+
+node12 back and forth
+hexString = yourNumber.toString(16);
+yourNumber = parseString(hexString, 16);
