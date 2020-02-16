@@ -4,7 +4,7 @@
 # git clone --bare git@github.com:github.com/user/repo.git
 # cd repo.git
 
-git filter-branch --env-filter '
+git filter-branch -f --env-filter '
 
 OLD_EMAIL="your-old-email@example.com"
 CORRECT_NAME="Your Correct Name"
