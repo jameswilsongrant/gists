@@ -1,0 +1,2 @@
+# Sumologic's split directive is smart enough to treat blocks of quotes as a single field when splitting on a space
+_sourceCategory="uploads/other" and "66.249.72." | parse "*" as raw | split raw delim=' ' extract 2 as hostname, 5 as remote_addr, 10 as request_uri, 11 as status
