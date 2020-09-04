@@ -54,7 +54,8 @@
     copy:
       content: |
         {
-          "userns-remap": "default"
+          "userns-remap": "default",
+          "userland-proxy": false
         }
       dest: /etc/docker/daemon.json
     notify: docker service

@@ -42,6 +42,10 @@
     package:
       name: ufw
       state: absent
+  - name: remove snapd apparmor config (requires reboot)
+    file:
+      path: /etc/apparmor.d/usr.lib.snapd.snap-confine.real
+      state: absent
   - name: atd disable
     service:
       name: atd
