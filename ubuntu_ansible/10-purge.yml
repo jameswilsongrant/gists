@@ -1,0 +1,63 @@
+# Purges unwanted base packages
+# ansible-playbook 10-purge.yml
+---
+- hosts: all
+  gather_facts: no
+  remote_user: ubuntu
+  become: true
+  tasks:
+  - name: snapd remove
+    package:
+      name: snapd
+      state: absent
+  - name: open-iscsi remove
+    package:
+      name: open-iscsi
+      state: absent
+  - name: packagekit remove
+    package:
+      name: packagekit
+      state: absent
+  - name: multipath-tools remove
+    package:
+      name: multipath-tools
+      state: absent
+  - name: policykit-1 remove
+    package:
+      name: policykit-1
+      state: absent
+  - name: accountsservice remove
+    package:
+      name: accountsservice
+      state: absent
+  - name: unattended-upgrades remove
+    package:
+      name: unattended-upgrades
+      state: absent
+  - name: popularity-contest remove
+    package:
+      name: popularity-contest
+      state: absent
+  - name: ufw remove
+    package:
+      name: ufw
+      state: absent
+  - name: atd disable
+    service:
+      name: atd
+      state: stopped
+      enabled: no
+  - name: systemd-timesyncd disable
+    service:
+      name: systemd-timesyncd
+      state: stopped
+      enabled: no
+  - name: systemd-logind disable
+    service:
+      name: systemd-logind
+      state: stopped
+      enabled: no
+  - name: autoremove
+    apt:
+      autoremove: yes
+      purge: yes

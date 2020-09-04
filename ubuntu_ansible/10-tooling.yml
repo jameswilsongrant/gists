@@ -1,0 +1,28 @@
+# Add basic troubleshooting tools
+# ansible-playbook 10-tooling.yml
+---
+- hosts: all
+  gather_facts: no
+  remote_user: ubuntu
+  become: true
+  tasks:
+  - name: net-tools package
+    package:
+      name: net-tools
+      state: present
+  - name: sysstat package
+    package:
+      name: sysstat
+      state: present
+  - name: htop package
+    package: 
+      name: htop
+      state: present
+  - name: iftop package
+    package:
+      name: iftop
+      state: present
+  - name: iotop package
+    package: 
+      name: iotop
+      state: present

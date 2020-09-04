@@ -1,0 +1,49 @@
+# Assumes you've run ssh-copy-id ubuntu@host
+# Disables root/ubuntu password login
+# Disables ipv6
+# Enables qemu-guest-agent
+# Enables passwordless sudo
+# ansible-playbook -K 00-basic.yml
+---
+- hosts: all
+  gather_facts: no
+  remote_user: ubuntu
+  become: true
+  tasks:
+  - name: apt update/dist-upgrade
+    apt:
+      update_cache: yes
+      upgrade: dist
+  - name: qemu-guest-agent package
+    package:
+      name: qemu-guest-agent
+      state: latest
+  - name: qemu-guest-agent service
+    service:
+      name: qemu-guest-agent
+      state: started
+  - name: sudo nopasswd
+    lineinfile:
+      dest: /etc/sudoers
+      regexp: '^sudo'
+      line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+      validate: 'visudo -cf %s'
+  - name: ubuntu disable passphrase
+    user:
+      name: ubuntu
+      password: '!'
+  - name: root disable passphrase
+    user:
+      name: root
+      password: '!'
+  - name: disable ipv6 (requires reboot)
+    lineinfile:
+      dest: /etc/default/grub
+      regexp: '^GRUB_CMDLINE_LINUX='
+      line: 'GRUB_CMDLINE_LINUX="ipv6.disable=1"'
+      backrefs: yes
+    notify: "update-grub"
+
+  handlers:
+    - name: update-grub
+      command: /usr/sbin/update-grub

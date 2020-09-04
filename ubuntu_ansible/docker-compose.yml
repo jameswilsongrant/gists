@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  nginx:
+    image: "nginx:latest"
+    deploy:
+      mode: replicated
+      replicas: 10
+      placement:
+        max_replicas_per_node: 5
+    ports:
+      - "8080:80" 

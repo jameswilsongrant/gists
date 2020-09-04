@@ -1,0 +1,74 @@
+# Installs the docker runtime from docker.io
+# ansible-playbook 20-docker.yml
+---
+- hosts: docker
+  gather_facts: no
+  remote_user: ubuntu
+  become: true
+  tasks:
+  - name: apt update
+    apt:
+      update_cache: yes
+  - name: apt-transport-https install
+    package:
+      name: apt-transport-https
+      state: present
+  - name: ca-certificates install
+    package:
+      name: ca-certificates
+      state: present
+  - name: curl install
+    package:
+      name: curl
+      state: present
+  - name: gnupg-agent install
+    package:
+      name: gnupg-agent
+      state: present
+  - name: software-properties-common install
+    package:
+      name: software-properties-common
+      state: present
+  - name: apt-key add docker
+    shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -"
+    args:
+      warn: no
+  - name: add-apt-repository docker
+    command: "add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable'"
+  - name: apt update
+    apt:
+      update_cache: yes
+  - name: docker-ce install
+    package:
+      name: docker-ce
+      state: present
+  - name: docker-ce-cli install
+    package:
+      name: docker-ce-cli
+      state: present
+  - name: containerd.io install
+    package:
+      name: containerd.io
+      state: present
+  - name: docker daemon.json
+    copy:
+      content: |
+        {
+          "userns-remap": "default"
+        }
+      dest: /etc/docker/daemon.json
+    notify: docker service
+  - name: disable swap
+    lineinfile:
+      dest: /etc/fstab
+      regexp: '^/swap.img'
+      line: '# swap disabled by 20-docker.yml'
+    notify: swapoff /swap.img
+
+  handlers:
+    - name: docker service
+      service:
+        name: docker
+        state: restarted
+    - name: swapoff /swap.img
+      command: swapoff /swap.img

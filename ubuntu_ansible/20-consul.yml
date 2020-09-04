@@ -1,0 +1,44 @@
+# Installs consul
+# ansible-playbook 20-consul.yml
+---
+- hosts: master,docker
+  gather_facts: no
+  remote_user: ubuntu
+  become: true
+  tasks:
+  - name: apt update
+    apt:
+      update_cache: yes
+  - name: apt-transport-https install
+    package:
+      name: apt-transport-https
+      state: present
+  - name: ca-certificates install
+    package:
+      name: ca-certificates
+      state: present
+  - name: curl install
+    package:
+      name: curl
+      state: present
+  - name: gnupg-agent install
+    package:
+      name: gnupg-agent
+      state: present
+  - name: software-properties-common install
+    package:
+      name: software-properties-common
+      state: present
+  - name: apt-key add hashicorp
+    shell: "curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -"
+    args:
+      warn: no
+  - name: add-apt-repository hashicorp
+    command: "add-apt-repository 'deb [arch=amd64] https://apt.releases.hashicorp.com focal main'"
+  - name: apt update
+    apt:
+      update_cache: yes
+  - name: consul install
+    package:
+      name: consul
+      state: present
