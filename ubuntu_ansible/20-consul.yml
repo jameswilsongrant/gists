@@ -25,16 +25,14 @@
     package:
       name: gnupg-agent
       state: present
-  - name: software-properties-common install
-    package:
-      name: software-properties-common
-      state: present
   - name: apt-key add hashicorp
     shell: "curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -"
     args:
       warn: no
   - name: add-apt-repository hashicorp
-    command: "add-apt-repository 'deb [arch=amd64] https://apt.releases.hashicorp.com focal main'"
+    copy:
+      content: deb [arch=amd64] https://apt.releases.hashicorp.com focal main
+      dest: /etc/apt/sources.list.d/hashicorp.list
   - name: apt update
     apt:
       update_cache: yes
